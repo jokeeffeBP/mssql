@@ -1,10 +1,14 @@
 -- List all the tables in the schema
 SELECT table_name FROM information_schema.tables
 
+-- disable constraints on all tables
+-- EXEC sp_msforeachtable "ALTER TABLE ? NOCHECK CONSTRAINT all"
 
 --select * from INFORMATION_SCHEMA.TABLES
 --alter table dbo.COM_Address with check check constraint all
 
+-- Statement below will iterate through all the tables in the data dictionary and create
+-- the individual alter table statements.
 SELECT 'alter table dbo.' + table_name + ' with check check constraint all' FROM information_schema.tables where table_type='BASE TABLE' order by table_name
 
 
